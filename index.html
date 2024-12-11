@@ -4,21 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <title>Todo List</title>
   </head>
   <body>
-    <h1>Todo List</h1>
-    <hr />
+    <header>
+      <h1>Todo List</h1>
+      <hr />
+    </header>
 
     <section>
       <h2>Nueva Tarea</h2>
       <input type="text" id="taskInput" />
-      <button id="addTask">Agregar</button>
+      <button id="addTaskButton">Agregar</button>
     </section>
 
     <section>
-      <p>Total: <span id="taskTotal">0</span></p>
-      <p>Realizadas: <span id="taskCompleted">0</span></p>
+      <p>Total: <span id="totalTasks">0</span></p>
+      <p>Realizadas: <span id="completedTasks">0</span></p>
     </section>
 
     <section id="taskList"></section>

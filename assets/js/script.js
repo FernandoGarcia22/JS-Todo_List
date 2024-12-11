@@ -4,24 +4,25 @@ let tareas = [
   { id: 3, tarea: "Hacer aseo", estado: false },
 ];
 
-const taskInput = document.querySelector("#taskInput");
-const btnAddTask = document.querySelector("#addTask");
-const taskTotal = document.querySelector("#taskTotal");
-const taskCompleted = document.querySelector("#taskCompleted");
-const taskList = document.querySelector("#taskList");
+const entradaTarea = document.getElementById("taskInput");
+const botonAgregarTarea = document.getElementById("addTaskButton");
+const totalTareasElemento = document.getElementById("totalTasks");
+const tareasCompletadasElemento = document.getElementById("completedTasks");
+const listaTareasElemento = document.getElementById("taskList");
 
 function actualizarConteoTareas() {
   const total = tareas.length;
   const completadas = tareas.filter((tarea) => tarea.estado).length;
-  taskTotal.innerHTML = total;
-  taskCompleted.textContent = completadas;
+  totalTareasElemento.innerHTML = total;
+  tareasCompletadasElemento.innerHTML = completadas;
 }
 
 function renderizarTareas() {
-  taskList.innerHTML = "";
+  listaTareasElemento.innerHTML = "";
   for (let tarea of tareas) {
     const itemTarea = document.createElement("div");
     itemTarea.classList.add("task-item");
+
     itemTarea.innerHTML = `
             <span class="${tarea.estado ? "completed" : ""}">${tarea.id}. ${
       tarea.tarea
@@ -29,16 +30,16 @@ function renderizarTareas() {
             <input type="checkbox" class="statusCheckbox" ${
               tarea.estado ? "checked" : ""
             } data-id="${tarea.id}">
-            <button class="deleteBtn" data-id="${tarea.id}">Eliminar</button>
+            <button class="delete-btn" data-id="${tarea.id}">Eliminar</button>
         `;
 
-    taskList.appendChild(itemTarea);
+    listaTareasElemento.appendChild(itemTarea);
   }
   actualizarConteoTareas();
 }
 
 function agregarTarea() {
-  const descripcionTarea = taskInput.value.trim();
+  const descripcionTarea = entradaTarea.value.trim();
   if (descripcionTarea !== "") {
     const nuevaTarea = {
       id: tareas.length ? tareas[tareas.length - 1].id + 1 : 1,
@@ -67,9 +68,9 @@ function cambiarEstadoTarea(id) {
   }
 }
 
-btnAddTask.addEventListener("click", agregarTarea);
+botonAgregarTarea.addEventListener("click", agregarTarea);
 
-taskList.addEventListener("click", (evento) => {
+listaTareasElemento.addEventListener("click", (evento) => {
   const idTarea = parseInt(evento.target.getAttribute("data-id"), 10);
   if (evento.target.classList.contains("statusCheckbox")) {
     cambiarEstadoTarea(idTarea);
